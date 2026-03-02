@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "polls.apps.PollsConfig",
     "contact_us.apps.ContactUsConfig",
+    "articles.apps.ArticlesConfig"
+
     
 ]
 
