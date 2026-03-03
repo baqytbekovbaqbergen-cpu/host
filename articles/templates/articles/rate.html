@@ -1,0 +1,17 @@
+<h2>{{ article.title }}</h2>
+<p><strong>Автор:</strong> {{ article.author }}</p>
+<p><strong>Текст:</strong> {{ article.text }}</p>
+<p><strong>Средний рейтинг:</strong> {{ article.rating }} (голосов: {{ article.votes }})</p>
+
+<form action="{% url 'rate_article' article.pk %}" method="post">
+    {% csrf_token %}
+    <label>Оцените статью:</label>
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button type="submit">Голосовать</button>
+</form>
