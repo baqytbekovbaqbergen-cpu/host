@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<head>
+    <h1>Contact us list</h1>
+</head>
+<body>
+    {% for contact in contacts %}
+        <article>
+            <h2><a href="{% url 'contact_detail' contact.pk %}">{{ contact.message }}</a></h2>
+            <p>Name: {{ contact.name }}</p>
+            <p>Email: {{ contact.email }}</p>
+            <p>{{ contact.message }}</p>
+            
+        </article>
+        <hr>
+    {% empty %}
+        <p>no message</p>
+    {% endfor %}
+</body>
+</html>

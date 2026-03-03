@@ -1,20 +1,18 @@
 <!DOCTYPE html>
-<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <title>Мои статьи</title>
+    <title>Articles</title>
 </head>
 <body>
-    <h1>Список статей</h1>
+    <h1>List</h1>
     {% for article in articles %}
         <article>
-            <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
-            <p><strong>Автор:</strong> {{ article.author }}</p>
+            <h2><a> href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
+            <p><strong>Author:</strong> {{ article.author }}</p>
             <p>{{ article.text }}</p>
         </article>
         <hr>
     {% empty %}
-        <p>Статей пока нет.</p>
+        <p>no articles</p>
     {% endfor %}
 </body>
 </html>
