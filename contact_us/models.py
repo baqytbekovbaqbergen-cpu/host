@@ -5,7 +5,8 @@ class ContactMessage(models.Model):
     email = models.CharField(max_length=100)
     message = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-
+    answer = models.CharField(max_length=100, null=True, blank=True)
     def __str__(self):
         return f"{self.name} {self.email}" 
+
 

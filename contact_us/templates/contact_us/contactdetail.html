@@ -1,8 +1,11 @@
-<h1>{{ contact.name }}</h1>
+<p>{{ contact.name }}</p>
 <p>{{ contact.email }}</p>
 <hr>
 <div>
     {{ contact.message }}
 </div>
+<br>
+<a href="{% url 'answer' %}">Reply to a message</a>
+
 <br>
 <a href="{% url 'contactlist' %}">Go back</a>

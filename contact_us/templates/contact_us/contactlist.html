@@ -5,11 +5,8 @@
 <body>
     {% for contact in contacts %}
         <article>
-            <h2><a href="{% url 'contact_detail' contact.pk %}">{{ contact.message }}</a></h2>
-            <p>Name: {{ contact.name }}</p>
-            <p>Email: {{ contact.email }}</p>
-            <p>{{ contact.message }}</p>
-            
+            <a href="{% url 'contact_detail' contact.pk %}">{{ contact.name }}</a>
+            <p>{{contact.message}}</p>
         </article>
         <hr>
     {% empty %}
