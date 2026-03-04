@@ -10,7 +10,9 @@
         <article>
             <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
             <p><strong>Автор:</strong> {{ article.author }}</p>
-            <p><strong>Рейтинг:</strong> {{ article.rating }}/5</p>
+            <p><strong>Средний рейтинг:</strong> {{ article.rating|floatformat:1 }} (голосов: {{ article.votes }})</p>
+            <p>{{ article.text }}</p>
+            <p><a href="{% url 'article_detail' article.pk %}">Открыть статью и проголосовать</a></p>
 
             <p>{{ article.text }}</p>
         </article>

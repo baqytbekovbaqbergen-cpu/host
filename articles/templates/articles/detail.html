@@ -1,9 +1,24 @@
 <h1>{{ article.title }}</h1>
 <p><strong>Автор:</strong> {{ article.author }}</p>
-<p><strong>Рейтинг:</strong> {{ article.rating }}/5</p>
+<p><strong>Средний рейтинг:</strong> {{ article.rating|floatformat:1 }} (голосов: {{ article.votes }})</p>
+
 <hr>
 <div>
     {{ article.text }}
 </div>
+
+<form action="{% url 'rate_article' article.pk %}" method="post">
+    {% csrf_token %}
+    <label>Оцените статью:</label>
+    <select name="rating">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+    <button type="submit">Голосовать</button>
+</form>
+
 <br>
 <a href="{% url 'article_list' %}">Назад к списку</a>
