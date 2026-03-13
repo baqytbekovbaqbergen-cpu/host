@@ -6,6 +6,8 @@ from django.views import generic
 from django.utils import timezone
 from .models import Choice, Question
 from django.views.decorators.csrf import csrf_exempt
+from .models import Account
+import json
 
 
 class IndexView(generic.ListView):
@@ -79,10 +81,20 @@ def test(request):
     else:
         return HttpResponse("No POST")
 
-
+@csrf_exempt
 def account(request):
     if request.method == "POST":
-        from models import Account
-        acc = Account(login="Nurayat",password="nicenice")
-        q.save()
+        ac = json.loads(request.body)
+        raw_password = ac.get('password','')
+        encrypted_password = Account.sipher(raw_password ,shift = 3)
+        acc = Account(
+            login=(f'{ac['login']}'),
+            password=(encrypted_password)
+        )
+        acc.save()
+        return HttpResponse(acc)  
+
+    return HttpResponse("NICE"*5)
+        
+
 

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question,Choice
+from .models import Question,Choice,Account
 
 class QuestionAdmin(admin.ModelAdmin):
     fieldsets =[
@@ -15,3 +15,4 @@ class ChoiceInline(admin.StackedInline):
     extra = 3
 
 admin.site.register(Question, QuestionAdmin)
+admin.site.register(Account)
