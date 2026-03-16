@@ -36,16 +36,17 @@ class Account(models.Model):
     login = models.CharField(max_length=100)
     password = models.CharField(max_length=100)
     @staticmethod
-    def sipher(password,shift,mode =encrypt):
+    def sipher(password,shift,mode ="encrypt"):
         result = ''
         if mode == "decrypt":
             shift =-shift
         for i in password:
             if i.isalpha():
                 base = ord('A') if i.isupper() else ord('a')
-                result = chr((ord(i) - base +shift) %26 +base)  
+                result += chr((ord(i) - base +shift) %26 +base)  
             else:
                 result+=i
         return result
     def __str__(self):
         return f"{self.login} {self.password}"
+    
