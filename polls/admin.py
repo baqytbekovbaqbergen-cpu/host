@@ -16,3 +16,4 @@ class ChoiceInline(admin.StackedInline):
 
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Account)
+admin.site.register(Choice)

@@ -6,7 +6,7 @@
     <h1>List</h1>
     {% for article in articles %}
         <article>
-            <h2><a> href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
+            <h2><a href="{% url 'article_detail' article.pk %}">{{ article.title }}</a></h2>
             <p><strong>Author:</strong> {{ article.author }}</p>
             <p>{{ article.text }}</p>
         </article>

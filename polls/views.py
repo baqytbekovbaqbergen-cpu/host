@@ -1,5 +1,5 @@
 from django.db.models import F
-from django.http import HttpResponseRedirect,HttpResponse
+from django.http import HttpResponseRedirect,HttpResponse,JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
@@ -8,6 +8,7 @@ from .models import Choice, Question
 from django.views.decorators.csrf import csrf_exempt
 from .models import Account
 import json
+
 
 
 class IndexView(generic.ListView):
@@ -92,9 +93,32 @@ def account(request):
             password=(encrypted_password)
         )
         acc.save()
-        return HttpResponse(acc)  
+        return JsonResponse({"id": acc.id, "login": acc.login})
+  
+
+    
+    if request.method == "GET":
+        accounts = list(Account.objects.all().values('login'))
+        return JsonResponse(accounts,safe=False)
 
     return HttpResponse("NICE"*5)
+def idaccount(request,id):
+    if request.method == "POST":
+        ac = json.loads(request.body)
+        acc = Account(
+            login=(f'{ac['login']}'),
+            password=(f'{ac['password']}')
+            )
+        acc.save()
+        return JsonResponse({"id": acc.id,})
+
+    if request.method == "GET":
+        
+        accounts = list(Account.objects.all().values(id))
+        return JsonResponse(accounts,safe=False)
+
+
+        
         
 
 
