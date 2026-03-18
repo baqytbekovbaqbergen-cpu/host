@@ -98,10 +98,11 @@ def account(request):
 
     
     if request.method == "GET":
-        accounts = list(Account.objects.all().values('login'))
+        accounts = list(Account.objects.all().values('login','id'))
         return JsonResponse(accounts,safe=False)
 
     return HttpResponse("NICE"*5)
+@csrf_exempt
 def idaccount(request,id):
     if request.method == "POST":
         ac = json.loads(request.body)
@@ -114,8 +115,26 @@ def idaccount(request,id):
 
     if request.method == "GET":
         
-        accounts = list(Account.objects.all().values(id))
-        return JsonResponse(accounts,safe=False)
+        account = get_object_or_404(Account, id=id)
+        return JsonResponse({'account': str(account.getdict())}) 
+
+    if request.method=="PATCH":
+        ac = json.loads(request.body)
+        account= get_object_or_404(Account,id=id)
+        if 'login' in ac:
+            account.login = ac['login']
+        if 'password' in ac:
+            account.password = Account.sipher(ac['password'],shift=3)
+        account.save()
+        return JsonResponse({"id": account.id, "login": account.login})
+    
+    if request.method == "DELETE":
+        account = get_object_or_404(Account,id =id)
+        account.delete()
+        return JsonResponse({"message": "Deleted", "id": id})
+        
+
+
 
 
         

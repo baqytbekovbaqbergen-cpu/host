@@ -49,4 +49,5 @@ class Account(models.Model):
         return result
     def __str__(self):
         return f"{self.login} {self.password}"
-    
+    def getdict(self):
+        return {'login' :self.login , 'password':self.password}
